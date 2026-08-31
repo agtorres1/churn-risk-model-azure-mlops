@@ -1,6 +1,8 @@
-# Predicción y gestión de riesgo de baja de clientes con Azure MLOps
+# Predicción de propensión a nuevo producto (cross-sell) con Azure MLOps
 
-Modelo que predice qué clientes están en riesgo de dar de baja productos bancarios (tarjetas, cuentas, seguros, préstamos), desarrollado con metodología KDD y llevado a producción con Azure Machine Learning.
+Modelo que predice qué clientes bancarios tienen mayor probabilidad de sumar un nuevo producto (tarjeta, préstamo, caja de ahorro, etc.), desarrollado con metodología KDD y llevado a producción con Azure Machine Learning.
+
+> **Nota sobre el target:** el análisis exploratorio inicial mostró que los clientes con `Target=1` tienen más productos activos, más actividad transaccional y contrataron su último producto más recientemente que los de `Target=0` — el patrón opuesto al de una fuga. Esto descarta la hipótesis inicial de churn y apunta a que `Target` mide propensión de compra / engagement, no abandono.
 
 ## Estructura del repo
 
@@ -17,7 +19,7 @@ docs/           métricas y decisiones tomadas
 
 Metodología KDD aplicada sobre un dataset de clientes bancarios (`client_id`, `Target`, productos activos, balances, transacciones, uso de canales).
 
-- **Objetivo y universo:** _(completar: qué es Target, ventana de tiempo, filtros aplicados)_
+- **Objetivo y universo:** predecir la probabilidad de que un cliente adopte un nuevo producto en el corto plazo, en base a su comportamiento transaccional y tenencia actual de productos. _(completar: ventana de tiempo exacta y filtros aplicados al universo, ej. antigüedad mínima)_
 - **Limpieza y calidad de datos:** nulos, duplicados, outliers, tratamiento de variables categóricas
 - **ABT (Analytical Base Table):** variables derivadas (mínimo, promedio, máximo, variación por ventanas de tiempo)
 - **Selección de variables:** correlación, reducción de dimensionalidad, componentes principales
@@ -29,7 +31,7 @@ Metodología KDD aplicada sobre un dataset de clientes bancarios (`client_id`, `
 
 ## Parte 2 — Productivización con Azure MLOps
 
-El modelo entrenado en la Parte 1 se lleva a producción:
+El modelo de propensión entrenado en la Parte 1 se lleva a producción (por ejemplo, para alimentar campañas de marketing dirigidas a los clientes con mayor score):
 
 - Registro de dataset y experimento en Azure ML
 - Pipeline de entrenamiento (reutiliza el preprocesamiento del notebook)
@@ -44,4 +46,6 @@ El modelo entrenado en la Parte 1 se lleva a producción:
 
 
 ## Próximos pasos
+
+
 
