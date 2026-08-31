@@ -41,8 +41,7 @@ El modelo entrenado en la Parte 1 se lleva a producción:
 
 ## Resultados
 
-_(completar cuando tengas las métricas finales: AUC, KS, principales variables predictoras)_
+
 
 ## Próximos pasos
 
-_(completar: qué harías distinto con más tiempo/datos)_
